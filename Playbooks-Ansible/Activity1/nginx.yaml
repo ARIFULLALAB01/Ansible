@@ -1,10 +1,11 @@
 ---
-- name: install tree
+- name: install nigix server
   hosts: all
   become: yes
   tasks:
-    - name: install tree on ubuntu
-      ansible.builtin.apt:
-        name: tree
-        update_cache: yes
-        state: present
+   - name: install nginx using apt
+     ansible.builtin.apt:
+      name: nginx
+      update_cache: yes
+      state: present
+
