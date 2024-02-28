@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   tasks:
-   - name: install nginx using apt
+   - name: install nginx using apt on Node server
      ansible.builtin.apt:
       name: nginx
       update_cache: yes
