@@ -1,0 +1,13 @@
+---
+- name: install apache
+  become: yes
+  hosts: all
+  tasks:
+    - name: install httpd
+      package:
+        name: "{{ package_name }}"
+        state: present
+    - name: enable and start httpd
+      ansible.builtin.systemd_service:
+        name: "{{ package_name }}"
+        # package: dnf and apt be replaced by package Concepts

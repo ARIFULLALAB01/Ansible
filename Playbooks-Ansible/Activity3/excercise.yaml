@@ -1,0 +1,13 @@
+# Concepts:
+
+#Exercise::
+#-----------------------------------------------------------------------
+
+#Ensure you have one ansible control node and one node
+#ansible control node:
+#ubuntu 22.04
+#node:
+#ubuntu 20.04
+#Configure ansible by ensuring the common user name with sudo permissions is ansible
+#----------------------
+#Write a playbook to install git, tree, net-tools on both node and then adopt to run on ansible control node.
