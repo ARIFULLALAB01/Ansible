@@ -9,11 +9,11 @@
       when: ansible_facts['distribution'] != 'Ubuntu'
     - name : update packages and install java
       ansible.builtin.apt:
-        name: openjdk-11-jdk
+        name: "{{ java_package_name }}"
         update_cache: yes
         state: present
     - ansible.builtin.debug:
-        msg: "java is installed using package openjdk-11-jdk"
+        msg: "java is installed using package {{ java_package_name }} "
     - name: create tomcat group
       ansible.builtin.group:
         name: "{{ group }}"
