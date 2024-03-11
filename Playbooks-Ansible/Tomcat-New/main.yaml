@@ -13,7 +13,7 @@
         update_cache: yes
         state: present
     - ansible.builtin.debug:
-        msg: "java is installed using package {{ java_package_name }}"
+        msg: "java is installed using package openjdk-11-jdk"
     - name: create tomcat group
       ansible.builtin.group:
         name: "{{ group }}"
