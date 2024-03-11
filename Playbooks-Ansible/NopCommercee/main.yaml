@@ -1,16 +1,16 @@
 --- 
-- name: install nopcommerce on ubuntu 
+- name: install nopcommerce on qtdevops 
   hosts: webserver
   become: yes
   tasks:
     - name: fail for unsupported os family 
       ansible.builtin.fail: 
-        msg: this works only on Ubuntu os
-      when: ansible_facts['distribution'] != 'Ubuntu'
+        msg: this works only on qtdevops os
+      when: ansible_facts['distribution'] != 'ubuntu'
     - name: install microsoft packages 
       ansible.builtin.get_url:
         url: "{{ microsoft_url }}"
-        dest: /home/ubuntu/packages-microsoft-prod.deb 
+        dest: /home/qtdevops/packages-microsoft-prod.deb 
     -  name: microsoft prod 
        ansible.builtin.command: "{{ dpkg_package }}"
     -  name: install packages 
