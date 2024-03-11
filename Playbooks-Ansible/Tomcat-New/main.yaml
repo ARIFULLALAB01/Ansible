@@ -1,0 +1,87 @@
+---
+- name: install tomcat 10
+  hosts: appserver
+  become: yes
+  tasks:
+    - name: fail for unsupported os
+      ansible.builtin.fail:
+        msg: "This playbook is designed only for Ubuntu os"
+      when: ansible_facts['distribution'] != 'Ubuntu'
+    - name : update packages and install java
+      ansible.builtin.apt:
+        name: "{{ java_package_name }}"
+        update_cache: yes
+        state: present
+    - ansible.builtin.debug:
+        msg: "java is installed using package {{ java_package_name }}"
+    - name: create tomcat group
+      ansible.builtin.group:
+        name: "{{ group }}"
+        state: present
+    - ansible.builtin.debug:
+        msg: "group {{ group }} has been created"
+    - name: create a tomcat user
+      ansible.builtin.user:
+        create_home: yes
+        system: yes
+        home: "{{ home_dir }}"
+        group: "{{ group }}"
+        name: "{{ user }}"
+        shell: "{{ user_shell }}"
+        state: present
+    - ansible.builtin.debug:
+        msg: "user {{ user }} has been created"
+    - name: 
+      ansible.builtin.unarchive:
+      src: "{{ tomcat_url }}"
+      dest: "{{ home_dir }}"
+      owner: "{{ user }}"
+      remote_src: yes
+    - ansible.builtin.debug:
+        msg: "tomcat is downloaded and extracted to {{ home_dir  }}"
+    - name: find all the shell files
+      find:
+        paths: "/opt/tomcat/apache-tomcat-10.0.10/bin"
+        patterns: '*.sh'
+      register: shell_files
+    - name: change permissions to execute
+      file:
+        path: "{{ item.path }}"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: "755"
+      loop: "{{ shell_files.files }}"
+    - name: create tomcat application accounts
+      ansible.builtin.copy:
+        src: files/tomcat-users.xml
+        dest: "/opt/tomcat/apache-tomcat-10.0.10/conf/tomcat-users.xml"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: '0600'
+    - name: allow remote hosts for manager
+      ansible.builtin.copy:
+        src: files/manager-context.xml
+        dest: "/opt/tomcat/apache-tomcat-10.0.10/webapps/manager/META-INF/context.xml"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: '0640'
+    - name: allow remote hosts for host-manager
+      ansible.builtin.copy:
+        src: files/hostmanager-context.xml
+        dest: "/opt/tomcat/apache-tomcat-10.0.10/webapps/host-manager/META-INF/context.xml"
+        owner: "{{ user }}"
+        group: "{{ group }}"
+        mode: '0640'
+    - name: Create a Systemd Service File
+      ansible.builtin.copy:
+        src: files/tomcat.service
+        dest: "/etc/systemd/system/tomcat.service"
+      notify:
+        - start tomcat
+  handlers:
+    - name: start tomcat
+      ansible.builtin.systemd_service:
+        name: tomcat
+        enabled: yes
+        daemon_reload: yes
+        state: started
