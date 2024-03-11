@@ -33,10 +33,10 @@
         msg: "user {{ user }} has been created"
     - name: 
       ansible.builtin.unarchive:
-      src: "{{ tomcat_url }}"
-      dest: "{{ home_dir }}"
-      owner: "{{ user }}"
-      remote_src: yes
+        src: "{{ tomcat_url }}"
+        dest: "{{ home_dir }}"
+        owner: "{{ user }}"
+        remote_src: yes
     - ansible.builtin.debug:
         msg: "tomcat is downloaded and extracted to {{ home_dir  }}"
     - name: find all the shell files
