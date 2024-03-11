@@ -3,11 +3,10 @@
   hosts: webserver
   become: yes
   tasks:
-    - name: fail for unsupported os family 
-      ansible.builtin.fail: 
-        msg: this works only on qtdevops os
-      when: ansible_facts['distribution'] != 'ubuntu'
-    - name: install microsoft packages 
+    - name: fail for unsupported os
+      ansible.builtin.fail:
+        msg: "This playbook is designed only for Ubuntu os"
+      when: ansible_facts['distribution'] != 'Ubuntu' 
       ansible.builtin.get_url:
         url: "{{ microsoft_url }}"
         dest: /home/qtdevops/packages-microsoft-prod.deb 
