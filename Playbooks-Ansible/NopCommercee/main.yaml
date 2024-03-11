@@ -10,10 +10,10 @@
       ansible.builtin.get_url:
         url: "{{ microsoft_url }}"
         dest: /home/qtdevops/packages-microsoft-prod.deb 
-    -  name: microsoft prod 
-       ansible.builtin.command: "{{ dpkg_package }}"
-    -  name: install packages 
-       ansible.builtin.apt:
+    - name: microsoft prod 
+      ansible.builtin.command: "{{ dpkg_package }}"
+    - name: install packages 
+      ansible.builtin.apt:
          name: "{{ package_name }}"
          update_cache: yes
          state: present
