@@ -1,0 +1,4 @@
+---
+Dot.net_package_name: openjdk-11-jdk
+Dot.net_Url: "https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
+home_dir: /home/ubuntu

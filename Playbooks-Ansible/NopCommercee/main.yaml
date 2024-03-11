@@ -1,0 +1,30 @@
+---
+- name: Install NOP Commarce
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: fail for unsupported os
+      ansible.builtin.fail:
+        msg: "This playbook is designed only for Ubuntu os"
+      when: ansible_facts['distribution'] != 'Ubuntu'
+    - name: download Nopcommerce Package
+      ansible.builtin.get_url:
+        url: "https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb "
+        dest: /home/ubuntu
+    - name: Allow wget and install package
+      ansible.builtin.command:
+        cmd: dpkg -i packages-microsoft-prod.deb
+    - name : Apt get install and apt get update
+      ansible.builtin.apt:
+        name:
+         - apt-transport-https
+         - aspnetcore-runtime-7.0
+        state: latest
+        update_cache: yes
+    - name: Install Nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+        update_cache: yes
+    - name: 
+      ansible.builtin.systemd:

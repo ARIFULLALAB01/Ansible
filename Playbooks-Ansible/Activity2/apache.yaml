@@ -5,13 +5,13 @@
   tasks:
    - name: update packages and install apache2
      ansible.builtin.apt:
-       name: apache2
-       state: present
+        name: apache2
+        state: present
    - name: enable and start apache service
-     ansible.builtin.systemd_service module:
-       name: apache2
-       enabled: yes
-       state: started
+     ansible.builtin.systemd:
+        name: apache2
+        enabled: yes
+        state: started
 
 ---
 - name: install apcahe on redhat
@@ -23,7 +23,7 @@
        name: httpd
        state: present
    - name: enable and start httpd service
-     ansible.builtin.systemd_service module:
+     ansible.builtin.systemd:
        name: httpd2
        enabled: yes
        state: started
