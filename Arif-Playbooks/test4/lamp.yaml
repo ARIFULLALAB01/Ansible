@@ -33,7 +33,7 @@
     - name: restart apache
       ansible.builtin.apt: 
         name: apache2
-        state: restarted
+        state: "restarted"
 
     - name: copy info.php
       ansible.builtin.copy:
@@ -43,7 +43,7 @@
     - name: restart apache
       ansible.builtin.apt: 
         name: apache2
-        state: restarted
+        state: "restarted"
 
       
 
