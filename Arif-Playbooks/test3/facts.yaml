@@ -1,0 +1,27 @@
+## ansible_facts['os_family'] == 'Debian'  -- This will provide the identification filter
+## package: dnf and apt be replaced by package Concepts
+## {{ package_name }} = package_name=httpd
+## when: ansible_facts['os_family'] != 'RedHat' and ansible_facts['os_family'] != 'Debian'
+## when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] == 'Debian' >> excute 1st then check the above statement
+---
+- name: Install Apcahe using ansible_facts
+  hosts: all
+  become: yes
+  tasks:
+    - name: install Apcahe bu ysing facts modules
+      ansible.builtin.apt:
+        name: apache2
+        update_cache: yes
+        state: present
+        purge: true 
+        autoremove: true  
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: enable and start apache service
+      ansible.builtin.systemd_service:
+        name: apache2
+        enabled: yes
+        state: started
+        purge: true 
+        autoremove: true
+      when: ansible_facts['os_family'] == 'Debian'

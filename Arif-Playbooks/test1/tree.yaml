@@ -1,0 +1,13 @@
+#Manual Steps:
+#sudo apt update
+#sudo apt install tree  >>>  lets write a playbook
+---
+- name: Install Tree on Ubunut server Node
+  become: yes
+  hosts: all
+  task: 
+    - name: Installing Tree on ubunutNode
+      ansible.builtin.apt:
+        name: tree
+        update_cache: true
+        state: present

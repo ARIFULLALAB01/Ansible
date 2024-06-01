@@ -1,0 +1,17 @@
+#Manual Steps: Install Apache on ubunut Server
+#sudo apt update
+#sudo apt install apache2 -y  >>>  lets write a playbook
+#sudo systemctl enable apache2
+#sudo systemctl start apache2
+---
+- name: Install apache2 on ubunut Server
+  become: yes
+  hosts: all
+  tasks:
+    - name: Install Apache2 on ubunutu
+      apt:
+        name: apache2, git
+        update_cache: yes
+        state: present
+
+

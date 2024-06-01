@@ -13,8 +13,6 @@
 #Write a playbook to install git, tree, net-tools on both node and then adopt to run on ansible control node.
 
 ---
----
----
 - name: install Git
   hosts: all
   become: yes

@@ -1,0 +1,15 @@
+#Manual Steps:
+#sudo apt update
+#sudo apt install nginx  >>>  lets write a playbook
+---
+- name: Install nginx
+  become: yes
+  hosts: all
+  tasks:
+    - name: install Nginx on ubuntu
+      ansible.builtin.apt:
+        - name: nginx
+          state: present
+          update_cache: true
+
+      

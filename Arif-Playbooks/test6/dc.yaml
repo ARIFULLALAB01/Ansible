@@ -1,0 +1,7 @@
+---
+- name: Install Apcahe using ansible_facts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Docker
+      

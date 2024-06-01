@@ -1,0 +1,52 @@
+## Manual Steps:
+#sudo apt update
+#sudo apt install apache2 -y
+#sudo systemctl enable apache2
+#sudo systemctl start apache2
+#sudo apt install php libapache2-mod-php php-mysql
+#sudo systemctl restart apache2
+# create a file in /var/www/html/info.php with content <?php phpinfo(); ?>
+#sudo systemctl restart apache2
+#-----------------------------------------------------------------------
+---
+- name: install Php pn ubuntu
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: update the pachage
+      ansible.builtin.apt: 
+        name: Apache2
+        update_cache: yes
+        state: present 
+
+    - name: enable and start apache2 pachages
+      ansible.builtin.systemd: 
+        name:
+        enabled: true
+        state: "started" 
+
+    - name: install php packages
+      ansible.builtin.apt:
+        name: php, ibapache2-mod-php, php-mysql
+        state: present
+
+    - name: restart apache
+      ansible.builtin.apt: 
+        name: Apache2
+        state: restarted
+
+    - name: copy info.php
+      ansible.builtin.copy:
+        src: info.php
+        dest: var/www/html/info.php
+
+    - name: restart apache
+      ansible.builtin.apt: 
+        name: Apache2
+        state: restarted
+
+      
+
+      
+
+      

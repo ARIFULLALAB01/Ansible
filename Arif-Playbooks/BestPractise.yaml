@@ -1,0 +1,8 @@
+## understand the Playbook Heirachy Structure
+## Verfi the Ansible Documentation
+## ansible_facts['os_family'] == 'Debian'  -- This will provide the identification filter
+## package: dnf and apt be replaced by package Concepts
+## {{ package_name }} = package_name=httpd
+## when: ansible_facts['os_family'] != 'RedHat' and ansible_facts['os_family'] != 'Debian'
+## when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] == 'Debian' >> excute 1st then check the above statement
+## fail for unsupported os 
