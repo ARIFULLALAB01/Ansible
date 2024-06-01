@@ -15,7 +15,7 @@
   tasks:
     - name: update the pachage
       ansible.builtin.apt: 
-        name: Apache2
+        name: apache2
         update_cache: yes
         state: present 
 
@@ -32,7 +32,7 @@
 
     - name: restart apache
       ansible.builtin.apt: 
-        name: Apache2
+        name: apache2
         state: restarted
 
     - name: copy info.php
@@ -42,7 +42,7 @@
 
     - name: restart apache
       ansible.builtin.apt: 
-        name: Apache2
+        name: apache2
         state: restarted
 
       
