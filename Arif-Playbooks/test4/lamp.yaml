@@ -12,11 +12,6 @@
         name: "{{ package }}"
         update_cache: yes
         state: present
-    - name: enable and start apache
-      service:
-        name: "{{ package }}"
-        enabled: yes
-        state: started
     - name: install php packages
       ansible.builtin.apt:
         name: "{{ php_packages }}"

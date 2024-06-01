@@ -6,4 +6,5 @@
 ## when: ansible_facts['os_family'] != 'RedHat' and ansible_facts['os_family'] != 'Debian'
 ## when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] == 'Debian' >> excute 1st then check the above statement
 ## fail for unsupported os 
-## defnetly not a good practise if the server is restarts multiple times
+## defnetly not a good practise if the server is restarts multiple times so we need to mention handlers
+## Ansible handlers, Ansible Facts, Ansible conditionals, Ansible variables, Ansible modules
